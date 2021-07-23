@@ -1,36 +1,54 @@
 package com.javaex.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.javaex.vo.PersonVo;
 
+@Repository
 public class PhoneDao {
 
 	// 필드
+
+	// 1. 필드 DataSource 추가
+	@Autowired
+	private DataSource dataSource;
+
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
 
-	private String driver = "oracle.jdbc.driver.OracleDriver"; // 드라이버
-	private String url = "jdbc:oracle:thin:@localhost:1521:xe"; // IP주소와 포트번호
-	private String id = "phonedb"; // SQL 계정 이름
-	private String pw = "phonedb"; // SQL 계정 비밀번호
+	 /*
+	 **** 2. 드라이버, URL, id, pw 삭제(applicationContext.xml에 세팅 해놓음) ****
+	 private String driver = "oracle.jdbc.driver.OracleDriver"; // 드라이버
+	 private String url = "jdbc:oracle:thin:@localhost:1521:xe"; // IP주소와 포트번호
+	 private String id = "phonedb"; // SQL 계정 이름
+	 private String pw = "phonedb"; // SQL 계정 비밀번호
+	 */
 
 	// DB 연결
 	private void getConnection() {
 		try {
-			Class.forName(driver);
+			// 3. 위와 마찬가지로 세팅 해놨기 때문에 삭제
+			// Class.forName(driver);
 
-			conn = DriverManager.getConnection(url, id, pw);
+			// 4. DriverManager가 아닌 dataSource의 getConnection 사용
+			conn = dataSource.getConnection();
 
-		} catch (ClassNotFoundException e) {
-			System.out.println("error: 드라이버 로딩 실패 - " + e);
+			 /*
+			   **** 5. ClassNotFoundException e 삭제 ****
+			   } catch (ClassNotFoundException e) {
+			   System.out.println("error: 드라이버 로딩 실패 - " + e);
+			 */
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		}

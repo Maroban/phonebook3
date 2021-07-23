@@ -12,7 +12,7 @@
 
   <p>수정 화면입니다. 아래 항목을 수정하고 "수정" 버튼을 클릭하세요.</p>
 
-  <form action="/phonebook3/modify" method="post">
+  <form action="${pageContext.request.contextPath}/modify" method="post">
     <label>이름:</label>
     <input type="text" name="name" value="${onePerson.name}">
     <br>

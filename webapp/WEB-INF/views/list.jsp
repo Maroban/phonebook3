@@ -28,15 +28,15 @@
         <td>${pList.company}</td>
       </tr>
       <tr>
-        <td><a href="/phonebook3/delete/${pList.person_id}"> [삭제]</a></td>
-        <td><a href="/phonebook3/modifyForm/${pList.person_id}"> [수정]</a></td>
+        <td><a href="${pageContext.request.contextPath}/delete/${pList.person_id}"> [삭제]</a></td>
+        <td><a href="${pageContext.request.contextPath}/modifyForm/${pList.person_id}"> [수정]</a></td>
       </tr>
     </table>
     <br>
 
   </c:forEach>
 
-  <a href="/phonebook3/writeForm">[추가번호 등록]</a>
+  <a href="${pageContext.request.contextPath}/writeForm">[추가번호 등록]</a>
 
 </body>
 </html>
